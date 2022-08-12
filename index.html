@@ -8,6 +8,7 @@
      <!-- Skeleton is our third party CSS framework -->
     <link rel="stylesheet" href="./assets/css/skeleton.css">
     <link rel="stylesheet" href="./assets/css/normalize.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>DREAM TEAM - How to Cook!</title>
 </head>
 <body>
@@ -18,13 +19,13 @@
               <div class="six columns">
                 <label for="exampleEmailInput">Search for a Recipe Here!</label>
                 <input class="u-full-width" type="text" placeholder="Recipe Keyword" id="recipe-search">
-                <input class="button-primary" type="submit" value="Submit">
+                <input class="button-primary" type="submit" value="Submit" id="search-button">
               </div>
             </div>
         </form>
+        <div class="six columns" id="recipe-box">
+        </div>
     </div>
-    
-    
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/spoonacular.js"></script>
 </body>
 </html>
