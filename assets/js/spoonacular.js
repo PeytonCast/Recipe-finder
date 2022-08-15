@@ -36,7 +36,6 @@ function getRecipe() {
 
         // randomize the choice - currently pulls 10 results from the API
         const recipeChoice = Math.floor(Math.random() * data.results.length);
-        console.log(recipeChoice);
         
         // set the variables to the object for saving
         recipeObj.id = data.results[recipeChoice].id;
@@ -63,7 +62,7 @@ function save(recipe) {
     for (let i = 0; i < localStorage.length; i++) {
         if (localStorage["recipe" + i] === JSON.stringify(recipe)) {
             exists = true;
-            break;
+            // break;
         }
     }
     // Save to localStorage only if recipe is new
@@ -80,7 +79,7 @@ function showSavedRecipes() {
     var savedEl = '';
     for (let i = 0; i < localStorage.length; i++) {
         let savedRecipe = JSON.parse(localStorage.getItem("recipe" + i));
-        savedEl += `<option value="Option ${i}">${savedRecipe.title}</option>`;
+        savedEl += `<option value="recipe${i}">${savedRecipe.title}</option>`;
     }
     // create a huge block of html to be replaced everytime this function runs
     let savedHTML = `<div class="six columns" id="search-history">
@@ -107,7 +106,20 @@ $('#save-recipe').on("click", (event) => {
 // makes sure the saved recipes appear on the page at load
 showSavedRecipes();
 
-// TODO: an event listener for the dropdown that replaces the recipe html with the selected recipe
-// $('#search-history').change(function() {
-//     console.log($(this).val());
-// });
+// an event listener for the dropdown that replaces the recipe html with the selected recipe
+$('#saved-recipes-dropdown').change(function() {
+    let recipeKey = $(this).val();
+    let recipeId = JSON.parse(localStorage.getItem(recipeKey));
+    
+    // make sure to set the correct data to recipeObj for the other APIs to access
+    recipeObj.id = recipeId.id;
+    recipeObj.image = recipeId.image;
+    recipeObj.title = recipeId.title;
+    console.log(recipeObj);
+
+    // show previous results on the page
+    let newRecipeHTML = `
+            <h2>${recipeObj.title}</h2>
+            <img src="${recipeObj.image}" alt="Food Image">`;
+            $('#recipe-data').html(newRecipeHTML);
+});
