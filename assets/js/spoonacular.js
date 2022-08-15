@@ -1,8 +1,5 @@
 // assign some variables
 var keyword = '';
-// TODO: instead of just the title, this should be an object
-var recipeTitle = '';
-
 var recipeObj = {
     id: 0,
     title: '',
@@ -69,10 +66,13 @@ function save(recipe) {
             break;
         }
     }
-    // Save to localStorage only if keyword is new
+    // Save to localStorage only if recipe is new
     if (exists === false) {
         localStorage.setItem('recipe' + localStorage.length, JSON.stringify(recipe));
+        console.log("saved");
+        showSavedRecipes();
     }
+    
 }
 
 
@@ -87,16 +87,26 @@ $('#search-button').on("click", (event) => {
 $('#save-recipe').on("click", (event) => {
     event.preventDefault();
     save(recipeObj);
-    // showSavedRecipes();
+    
 
     });
 
-// TODO: write a function to show the saved recipes
-// builds the previously searched buttons
-// function showSavedRecipes() {
-//     for (let i = 0; i < localStorage.length; i++) {
-//         let savedRecipe = localStorage.getItem("recipe" + i);
-//         let savedEl = `<option value="Option ${i}">${JSON.parse(savedRecipe)}</option>`;
-//         $('#saved-recipes').prepend(savedEl);
-//     }
-// }
+
+// builds the previously searched recipies into a selector drop
+function showSavedRecipes() {
+    var savedEl = '';
+    for (let i = 0; i < localStorage.length; i++) {
+        let savedRecipe = JSON.parse(localStorage.getItem("recipe" + i));
+        savedEl += `<option value="Option ${i}">${savedRecipe.title}</option>`;
+    }
+    // create a huge block of html to be replaced everytime this function runs
+    let savedHTML = `<div class="six columns" id="search-history">
+        <label for="exampleRecipientInput">Saved Recipes</label>
+        <select class="u-full-width" id="saved-recipes-dropdown">${savedEl}</select> 
+        </div>`
+
+    $('#search-history').replaceWith(savedHTML);
+}
+
+// makes sure the saved recipes appear on the page at load
+showSavedRecipes();
