@@ -69,12 +69,27 @@ function save(recipe) {
     // Save to localStorage only if recipe is new
     if (exists === false) {
         localStorage.setItem('recipe' + localStorage.length, JSON.stringify(recipe));
-        console.log("saved");
+        // updates the saved recipe dropdown
         showSavedRecipes();
     }
     
 }
 
+// builds the previously searched recipies into a selector drop
+function showSavedRecipes() {
+    var savedEl = '';
+    for (let i = 0; i < localStorage.length; i++) {
+        let savedRecipe = JSON.parse(localStorage.getItem("recipe" + i));
+        savedEl += `<option value="Option ${i}">${savedRecipe.title}</option>`;
+    }
+    // create a huge block of html to be replaced everytime this function runs
+    let savedHTML = `<div class="six columns" id="search-history">
+        <label for="exampleRecipientInput">Saved Recipes</label>
+        <select name="saved-recipes-dropdown" class="u-full-width" id="saved-recipes-dropdown">${savedEl}</select> 
+        </div>`
+
+    $('#search-history').replaceWith(savedHTML);
+}
 
 // keyword search button event listener
 $('#search-button').on("click", (event) => {
@@ -87,26 +102,12 @@ $('#search-button').on("click", (event) => {
 $('#save-recipe').on("click", (event) => {
     event.preventDefault();
     save(recipeObj);
-    
-
     });
-
-
-// builds the previously searched recipies into a selector drop
-function showSavedRecipes() {
-    var savedEl = '';
-    for (let i = 0; i < localStorage.length; i++) {
-        let savedRecipe = JSON.parse(localStorage.getItem("recipe" + i));
-        savedEl += `<option value="Option ${i}">${savedRecipe.title}</option>`;
-    }
-    // create a huge block of html to be replaced everytime this function runs
-    let savedHTML = `<div class="six columns" id="search-history">
-        <label for="exampleRecipientInput">Saved Recipes</label>
-        <select class="u-full-width" id="saved-recipes-dropdown">${savedEl}</select> 
-        </div>`
-
-    $('#search-history').replaceWith(savedHTML);
-}
 
 // makes sure the saved recipes appear on the page at load
 showSavedRecipes();
+
+// TODO: an event listener for the dropdown that replaces the recipe html with the selected recipe
+// $('#search-history').change(function() {
+//     console.log($(this).val());
+// });
