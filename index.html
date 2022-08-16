@@ -8,6 +8,7 @@
      <!-- Skeleton is our third party CSS framework -->
     <link rel="stylesheet" href="./assets/css/skeleton.css">
     <link rel="stylesheet" href="./assets/css/normalize.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>DREAM TEAM - How to Cook!</title>
 </head>
 <body>
@@ -18,19 +19,32 @@
               <div class="six columns">
                 <label for="exampleEmailInput">Search for a Recipe Here!</label>
                 <input class="u-full-width" type="text" placeholder="Recipe Keyword" id="recipe-search">
-                <input class="button-primary" type="submit" value="Submit">
+                <input class="button-primary" type="submit" value="Submit" id="search-button">
               </div>
             </div>
         </form>
+        <div class="row">
+          <div class="six columns" id="recipe-box"></div>
+          <p>RECIPE BOX</p>
+        </div>
+
+        <div class="row">
+          <div class="six columns" id="youtube"></div>
+            <p>YOUTUBE</p>
+            <img src="" alt="youtube" id="img1">
+            <img src="" alt="youtube" id="img2">
+            <img src="" alt="youtube" id="img3">
+            <img src="" alt="youtube" id="img4">
+            <img src="" alt="youtube" id="img5">
+          </div>
+
+          <div class="row">
+            <div class="six columns" id="kroger"></div>
+              <p>KROGER</p>
+          </div>
+
     </div>
-    
-    
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/spoonacular.js"></script>
+    <script defer src="assets/js/youtube.js"></script>
 </body>
 </html>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
