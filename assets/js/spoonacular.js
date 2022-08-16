@@ -8,17 +8,7 @@ var recipeObj = {
 
 
 // take in a keyword search and return a recipe.
-function getRecipe() {
-    // grab the value from the button
-    keyword = $('#recipe-search').val();
-    
-    // modal pop up if your entry is blank
-    if (keyword === '') {
-        // TODO: custom modal to return a "you can't leave this blank" message
-        return;
-    }
-    console.log(keyword);
-
+function getRecipe(keyword) {
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
@@ -90,11 +80,26 @@ function showSavedRecipes() {
     $('#search-history').replaceWith(savedHTML);
 }
 
+function modal(text) {
+    $('#myModal').css("display", "block");
+    $('#modal-text').html(text);
+    $('.close').on("click", (event) => {
+        event.preventDefault();
+        $('#myModal').css("display", "none");
+    })
+}
+
 // keyword search button event listener
 $('#search-button').on("click", (event) => {
     event.preventDefault();
-    keyword = $('#recipe-search').val();
-    getRecipe(event)
+    keyword = $('#recipe-search').val(); 
+    // if the field is left blank, modal pops-up
+    keyword = keyword.replace(/^\s+|\s+$/gm,'');
+    if (keyword.length === 0) {
+        modal("This field cannot be left blank");
+    } else {
+        getRecipe(keyword);
+    }
     });
 
 // save button event listener
