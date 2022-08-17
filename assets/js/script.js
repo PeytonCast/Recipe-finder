@@ -4,6 +4,7 @@ var recipeObj = {
     id: 0,
     title: '',
     image: '',
+    video: '',
   };
 
 
@@ -70,6 +71,11 @@ function save(recipe) {
     
 }
 
+function reload(){
+    location.reload();
+}
+
+
 // builds the previously searched recipies into a selector drop
 function showSavedRecipes() {
     var savedEl = '';
@@ -94,7 +100,7 @@ function youTubeMe(food) {
       };
       
     // build the query URL
-    let url =('https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + food + 'h&videoDefinition=any&key=AIzaSyDS0Je3yXD8OLa8niXdjgI9l0NeyW8YOuY');
+    let url =('https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + food + 'h&videoDefinition=any&key=AIzaSyCORVcYja6ySmnUMQhlN3rGb3MvH_Ad64I');
 
     fetch(url, requestOptions)
     .then((response) => {
@@ -106,19 +112,25 @@ function youTubeMe(food) {
         // console.log(data);
         // the actual video id
         //console.log(data.items[0].id.videoId);
-        // TODO: if zero results are returned, modal pop up with the error
+        console.log("YOUTUBE API CALL");
 
+        //build the youtube url that gets saved and used
+        let youtubeURL = "https://www.youtube.com/embed/" + data.items[0].id.videoId + "?controls=0";
         // displays the title and photo to the page
         let youtubeHTML = `
             <h3>How to Cook It:</h3>
             <iframe width="420" height="315"
-            src="https://www.youtube.com/embed/${data.items[0].id.videoId}?controls=0">
+            src="${youtubeURL}">
             </iframe>`
+            // set the video key in the object
+            recipeObj.video = youtubeURL;
             
             $('#youtube-video').html(youtubeHTML);
         
     })
-    .catch(error => console.log('error', error));
+    .catch(function(error) {
+            modal("There was a problem with the YouTube API <br>" + error);
+    });
 }
 
 // modal for pop up alerts
@@ -170,11 +182,21 @@ $('#saved-recipes-dropdown').change(function() {
     recipeObj.id = recipeId.id;
     recipeObj.image = recipeId.image;
     recipeObj.title = recipeId.title;
+    recipeObj.video = recipeId.video;
 
     // show previous results on the page
     let newRecipeHTML = `
-            <h3>${recipeObj.title}</h3>
-            <img src="${recipeObj.image}" alt="Food Image">`;
-            $('#recipe-data').html(newRecipeHTML);
-            youTubeMe(recipeObj.title);
+        <h3>${recipeObj.title}</h3>
+        <img src="${recipeObj.image}" alt="Food Image">`;
+        
+        $('#recipe-data').html(newRecipeHTML);
+           
+    // repeating myself a bit here, but we're working around a bug that requires a page refresh...
+    let youtubeHTML = `
+        <h3>How to Cook It:</h3>
+        <iframe width="420" height="315"
+        src="${recipeObj.video}">
+        </iframe>`
+    
+        $('#youtube-video').html(youtubeHTML);
 });
