@@ -8,7 +8,7 @@
      <!-- Skeleton is our third party CSS framework -->
     <link rel="stylesheet" href="./assets/css/skeleton.css">
     <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,13 +36,16 @@
                 <div class="one-half column">
                   <label for="exampleEmailInput">Search for a Recipe Here!</label>
                   <input class="u-full-width" type="text" placeholder="Recipe Keyword" id="recipe-search">
-                  <input class="btn button-primary" type="submit" value="Submit" id="search-button">
+                  <input class="btn" type="submit" value="Submit" id="search-button">
                 </div>
               </div>
           </form>
           </div>
           <div class="one-half column">
-            <div id="search-history"></div>
+            <div id="search-history">
+              <label for="exampleRecipientInput">Saved Recipes</label>
+              <select name="saved-recipes-dropdown" class="u-full-width" id="saved-recipes-dropdown"></select> 
+              </div>
           </div>
         </div>
       </div>
@@ -51,16 +54,25 @@
     <div class="section results">
       <div class="container">
         <div class="row">
-          <div class="one-half column" id="recipe-box">
+          <div id="results" class="six columns" id="recipe-box">
             <div id="recipe-data"></div>
-            <button class="button-primary" id="save-recipe">Save Recipe</button>  
+            <button class="btn" id="save-recipe">Save Recipe</button>  
           </div>
-          <div class="one-half column" id="youtube">
+          <div class="six columns" id="youtube">
             <div id="youtube-video"></div>
           </div>
         </div>
       </div>
     </div>
+
+    <div id="sum" class="section summary">
+      <div class="container">
+        <div class="row">
+          <div class="twelve columns" id="summary"></div>
+        </div>
+      </div>
+    </div>
+
 
     <script src="assets/js/script.js"></script>
 </body>
