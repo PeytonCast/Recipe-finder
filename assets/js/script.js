@@ -119,7 +119,7 @@ function youTubeMe(food) {
         // displays the title and photo to the page
         let youtubeHTML = `
             <h3>How to Cook It:</h3>
-            <iframe width="420" height="315"
+            <iframe width="420" height="315" id="iframe
             src="${youtubeURL}">
             </iframe>`
             // set the video key in the object
