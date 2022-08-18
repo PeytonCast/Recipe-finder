@@ -4,6 +4,7 @@ var recipeObj = {
     title: '',
     image: '',
     video: '',
+    summary: '',
   };
 
 // take in a keyword search and return a recipe
@@ -38,6 +39,7 @@ function getRecipe(keyword) {
             $('#recipe-data').html(recipeHTML);
 
         youTubeMe(recipeObj.title);
+        getSummary(recipeObj.id);
     })
     .catch(function(error) {
         if (error = "TypeError: Cannot read properties of undefined (reading 'id')"){
@@ -47,6 +49,35 @@ function getRecipe(keyword) {
         }
     });
 }
+
+function getSummary(id) {
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+    // build the query URL
+    let url = "https://api.spoonacular.com/recipes/" + id + "/information?includeNutrition=false&apiKey=443f5ece0cd74abf98a041d74e73cb36";
+
+    fetch(url, requestOptions)
+    .then(handleErrors)
+    .then((response) => {
+        return response.json();
+    })
+    .then(data => {
+        // set the summary to the object for saving
+        recipeObj.summary = data.summary;
+        console.log("summary data: " + data);
+        console.log("summary data: " + data.summary);
+        // displays the summary to the page
+        let summaryHTML = `<p>${recipeObj.summary}</p>`;
+            $('#summary').html(summaryHTML);
+
+    })
+    .catch(function(error) {
+            modal(error);
+    });
+}
+
 
 // saves the keyword to local storage if it doesn't already exist there
 function save(recipe) {
@@ -159,6 +190,8 @@ $('#saved-recipes-dropdown').change(function() {
     recipeObj.image = recipeId.image;
     recipeObj.title = recipeId.title;
     recipeObj.video = recipeId.video;
+    recipeObj.summary = recipeId.summary;
+
 
     // show previous results on the page
     let newRecipeHTML = `
@@ -167,7 +200,7 @@ $('#saved-recipes-dropdown').change(function() {
         
         $('#recipe-data').html(newRecipeHTML);
            
-    // repeating myself a bit here: stealing this from youTubeMe()
+    // repeating myself a bit here: stealing these from youTubeMe() and getSummary()
     let youtubeHTML = `
         <h3>How to Cook It:</h3>
         <iframe width="420" height="315"
@@ -175,6 +208,10 @@ $('#saved-recipes-dropdown').change(function() {
         </iframe>`
     
         $('#youtube-video').html(youtubeHTML);
+
+    let summaryHTML = `<p>${recipeObj.summary}</p>`;
+    $('#summary').html(summaryHTML);
+
 });
 
 // makes sure the saved recipes appear on the page at load
