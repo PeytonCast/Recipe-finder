@@ -15,7 +15,7 @@ function getRecipe(keyword) {
       };
       
     // build the query URL
-    let url = "https://api.spoonacular.com/recipes/complexSearch?query=" + keyword + "&number=20&apiKey=443f5ece0cd74abf98a041d74e73cb36";
+    let url = "https://api.spoonacular.com/recipes/complexSearch?query=" + keyword + "&number=20&apiKey=5c477e30c76a4b648544b129c184d9ee";
 
     fetch(url, requestOptions)
     .then(handleErrors)
@@ -33,8 +33,8 @@ function getRecipe(keyword) {
 
         // displays the title and photo to the page
         let recipeHTML = `
-            <h3>${recipeObj.title}</h3>
-            <img src="${recipeObj.image}" alt="Food Image">`;
+            <h3 id="h3" >${recipeObj.title}</h3>
+            <img class='container' id="img" src="${recipeObj.image}" alt="Food Image">`;
             $('#save-recipe').css("display", "block");
             $('#recipe-data').html(recipeHTML);
 
@@ -56,7 +56,7 @@ function getSummary(id) {
         redirect: 'follow'
       };
     // build the query URL
-    let url = "https://api.spoonacular.com/recipes/" + id + "/information?includeNutrition=false&apiKey=443f5ece0cd74abf98a041d74e73cb36";
+    let url = "https://api.spoonacular.com/recipes/" + id + "/information?includeNutrition=false&apiKey=5c477e30c76a4b648544b129c184d9ee";
 
     fetch(url, requestOptions)
     .then(handleErrors)
@@ -129,7 +129,7 @@ function youTubeMe(food) {
         // displays the title and photo to the page
         let youtubeHTML = `
             <h3>How to Cook It:</h3>
-            <iframe width="420" height="315" id="iframe
+            <iframe width="420" height="315" id="iframe" class='container'
             src="${youtubeURL}">
             </iframe>`
             // set the video key in the object
@@ -195,15 +195,15 @@ $('#saved-recipes-dropdown').change(function() {
 
     // show previous results on the page
     let newRecipeHTML = `
-        <h3>${recipeObj.title}</h3>
-        <img src="${recipeObj.image}" alt="Food Image">`;
+        <h3 id="h3" >${recipeObj.title}</h3>
+        <img  id="img" src="${recipeObj.image}" alt="Food Image">`;
         
         $('#recipe-data').html(newRecipeHTML);
            
     // repeating myself a bit here: stealing these from youTubeMe() and getSummary()
     let youtubeHTML = `
         <h3>How to Cook It:</h3>
-        <iframe width="420" height="315"
+        <iframe width="420" height="315" id='iframe'
         src="${recipeObj.video}">
         </iframe>`
     
