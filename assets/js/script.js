@@ -94,7 +94,7 @@ function youTubeMe(food) {
       };
       
     // build the query URL
-    let url =('https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + food + 'h&videoDefinition=any&key=AIzaSyDS0Je3yXD8OLa8niXdjgI9l0NeyW8YOuY');
+    let url =('https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + food + 'h&videoDefinition=any&key=AIzaSyCORVcYja6ySmnUMQhlN3rGb3MvH_Ad64I');
 
     fetch(url, requestOptions)
     .then((response) => {
@@ -111,7 +111,7 @@ function youTubeMe(food) {
         // displays the title and photo to the page
         let youtubeHTML = `
             <h3>How to Cook It:</h3>
-            <iframe width="420" height="315"
+            <iframe width="420" height="315" id="iframe"
             src="https://www.youtube.com/embed/${data.items[0].id.videoId}?controls=0">
             </iframe>`
             
