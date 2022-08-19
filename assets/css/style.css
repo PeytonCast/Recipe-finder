@@ -1,5 +1,4 @@
-
-
+/* hide the button by default */
 #save-recipe {
     display: none;
 }
@@ -30,7 +29,6 @@
     -webkit-animation-duration: 0.8s;
     animation-name: animatetop;
     animation-duration: 0.8s
-  
   }
   
   /* modal Close Button */
@@ -54,6 +52,7 @@
     from {top:-300px; opacity:0} 
     to {top:0; opacity:1}
   }
+
   /* more modal Animation */
   @keyframes animatetop {
     from {top:-300px; opacity:0}
@@ -67,6 +66,7 @@
     text-align: center;
   }
 
+/* background with image */
 body {
 background-image: url('../images/output-onlinepngtools.png');
 background-repeat: no-repeat;
@@ -75,6 +75,7 @@ background-size: cover;
 background-blend-mode: lighten;
 }
 
+/* main header */
 header h1 {
   font-family: 'Handlee', cursive;
     font-size:72px;
@@ -84,9 +85,13 @@ header h1 {
     width:100%; /*Add this*/
 
 }
+
+/* h3s */
 h3 {
   font-family: 'Handlee', cursive;  font-size: 40px;
 }
+
+/* the iframe - where the youtube video is embedded */
 #iframe {
   width: 100%;
   margin: 0px;
@@ -95,26 +100,32 @@ h3 {
   border-radius: 20px;
   border-style: none;
 }
+
 label { font-family: 'Handlee', cursive;
   font-size: 21px;
 }
 
 select {
-
   border-radius: 10px;
 }
+
+/*  button style */
 .btn {
   margin-top: 10px;
   background: brown;
   color: white;
 }
+
+/* summary background */
 #sum {
   background: rgba(56, 61, 57, 0.6);
   font-family: 'Handlee', cursive; font-size: 25px;
   color: white;
-  display: flex;
+  display: none;
   align-items: center;
 }
+
+/* image style */
 #img {
   width: 100%;
   border-radius: 9px;
@@ -124,10 +135,12 @@ select {
   margin-bottom: 2rem;
 }
 
-#h3{
+/* sets some h3s with a different style */
+#h3 {
   display: flex;
   align-items: flex-start;
 }
-#save-recipe{
+
+#save-recipe {
   margin-bottom: 1rem;
 }

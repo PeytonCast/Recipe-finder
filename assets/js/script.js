@@ -50,6 +50,7 @@ function getRecipe(keyword) {
     });
 }
 
+// gets the summary and displays it to the page
 function getSummary(id) {
     var requestOptions = {
         method: 'GET',
@@ -66,10 +67,9 @@ function getSummary(id) {
     .then(data => {
         // set the summary to the object for saving
         recipeObj.summary = data.summary;
-        console.log("summary data: " + data);
-        console.log("summary data: " + data.summary);
         // displays the summary to the page
         let summaryHTML = `<p>${recipeObj.summary}</p>`;
+            $('#sum').css("display", "flex");
             $('#summary').html(summaryHTML);
 
     })
@@ -101,6 +101,7 @@ function save(recipe) {
 function showSavedRecipes() {
     var savedEl = '';
     for (let i = 0; i < localStorage.length; i++) {
+        //TODO: this errors on first load, make that go away?
         let savedRecipe = JSON.parse(localStorage.getItem("recipe" + i));
         savedEl += `<option value="recipe${i}">${savedRecipe.title}</option>`;
     }
