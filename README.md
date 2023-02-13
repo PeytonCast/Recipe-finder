@@ -14,7 +14,7 @@ Next time you are staring blankly into the fridge wondering what to make, or per
 Consider something new and exciting like our Recipe Finder.
 ```
 
-Here is a link to the live finished page: https://peytoncast.github.io/Project-1-Recipe-finder/
+Here is a link to the live finished page: https://peytoncast.github.io/Recipe-finder/
 
 ## User Story
 
